@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Ravi Kumar | Neural Architect</title>
+    <meta name="description" content="AI Engineer & Neural Architect specializing in generative models and autonomous agents."/>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Premium Font Stack: Syne (Gilroy-style) for display, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@400;500;600;700;800&family=Lora:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                primary: "#000000",
+                secondary: "#0a0a0a",
+                surface: "#111111",
+                surfaceHover: "#1a1a1a",
+                textMain: "#f5f5f7",
+                textSecondary: "#a1a1a6",
+                textMuted: "#6e6e73",
+                accentBlue: "#0071E3",
+                accentPurple: "#bf5af2",
+                accentTeal: "#30d158",
+                borderSubtle: "rgba(255, 255, 255, 0.08)"
+              },
+              fontFamily: {
+                display: ['"Syne"', 'system-ui', 'sans-serif'],
+                body: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                mono: ['"JetBrains Mono"', 'monospace'],
+              },
+              fontSize: {
+                'hero': ['clamp(3rem, 8vw, 7rem)', { lineHeight: '1.15', letterSpacing: '-0.03em', fontWeight: '700' }],
+                'display': ['clamp(2.5rem, 5vw, 4rem)', { lineHeight: '1.15', letterSpacing: '-0.025em', fontWeight: '700' }],
+                'title': ['clamp(1.5rem, 3vw, 2rem)', { lineHeight: '1.3', letterSpacing: '-0.02em', fontWeight: '600' }],
+                'subtitle': ['clamp(1rem, 1.5vw, 1.25rem)', { lineHeight: '1.6', letterSpacing: '0', fontWeight: '400' }],
+                'body-lg': ['1.125rem', { lineHeight: '1.7', letterSpacing: '0' }],
+                'body': ['1rem', { lineHeight: '1.6', letterSpacing: '0' }],
+                'caption': ['0.875rem', { lineHeight: '1.5', letterSpacing: '0.01em' }],
+                'micro': ['0.75rem', { lineHeight: '1.4', letterSpacing: '0.02em' }],
+              },
+            }
+          }
+        }
+    </script>
+    <style>
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background: #000000;
+            color: #f5f5f7;
+            overflow-x: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Syne', system-ui, sans-serif;
+        }
+
+        /* Premium Dark Gradient Background - Purple/Magenta Tones */
+        .dark-gradient-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/photo-1638184984605-af1f05249a56-gUpjVt218whDQzFqNA2ZMNwwbVqmsN.avif') center center / cover no-repeat;
+        }
+
+        /* Dark overlay for better text contrast */
+        .dark-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+        }
+
+        /* Premium Glass Navigation */
+        .nav-glass {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+        }
+
+        /* Subtle Spotlight Effect */
+        .spotlight {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 60vh;
+            background: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(120, 80, 140, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Bottom Ambient Glow */
+        .ambient-glow {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 40vh;
+            background: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(100, 60, 120, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Premium Gradients */
+        .gradient-text-hero {
+            background: linear-gradient(135deg, #FFFFFF 0%, #A1A1AA 50%, #71717A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-text-accent {
+            background: linear-gradient(90deg, #0071E3, #A855F7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-text-teal {
+            background: linear-gradient(90deg, #14B8A6, #0071E3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Badge Styles */
+        .premium-badge {
+            background: linear-gradient(135deg, rgba(0, 113, 227, 0.15), rgba(168, 85, 247, 0.15));
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.1);
+        }
+
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* Parallax Container */
+        .parallax-layer {
+            will-change: transform;
+            transition: transform 0.1s linear;
+        }
+
+        /* Card Hover Effects */
+        .card-premium {
+            background: linear-gradient(135deg, #161616, #111111);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .card-premium:hover {
+            border-color: rgba(168, 85, 247, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5),
+                        0 0 40px rgba(168, 85, 247, 0.1);
+        }
+
+        /* Project Card */
+        .project-card {
+            background: #111111;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+        
+        .project-card:hover {
+            border-color: rgba(0, 113, 227, 0.4);
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.6),
+                        0 0 50px rgba(0, 113, 227, 0.1);
+        }
+        
+        .project-card:hover .project-image {
+            transform: scale(1.08);
+            filter: grayscale(0);
+        }
+        
+        .project-image {
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: grayscale(0.5);
+        }
+
+        /* Button Styles - White Glass Effect */
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.95);
+            color: #000000 !important;
+            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.15),
+                        0 0 0 1px rgba(255, 255, 255, 0.1),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 16px 48px rgba(255, 255, 255, 0.2),
+                        0 0 0 1px rgba(255, 255, 255, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        }
+        
+        .btn-primary:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-secondary:hover::before {
+            opacity: 1;
+        }
+
+        /* Typewriter Cursor */
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Icon Styles */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Section Divider */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        }
+
+        /* Smooth Scroll Section */
+        section {
+            position: relative;
+        }
+
+        /* Tag Pills */
+        .tag-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .tag-pill:hover {
+            background: rgba(168, 85, 247, 0.1);
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        /* Footer gradient */
+        .footer-gradient {
+            background: linear-gradient(180deg, #0A0A0A 0%, #050505 100%);
+        }
+
+        /* Mobile Menu */
+        #mobile-menu {
+            transform: translateY(-10px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        
+        #mobile-menu.open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0A0A0A;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body class="selection:bg-white/20 selection:text-white">
+    <!-- Premium Dark Gradient Background -->
+    <div class="dark-gradient-bg"></div>
+    <div class="dark-overlay"></div>
+    <div class="spotlight"></div>
+    <div class="ambient-glow"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 nav-glass border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="font-display text-xl font-bold tracking-tight text-textMain hover:text-accentBlue transition-colors">
+                Ravi<span class="gradient-text-accent">.</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-10">
+                <a href="#about" class="font-body text-caption font-medium text-textSecondary hover:text-textMain transition-colors">About</a>
+                <a href="#expertise" class="font-body text-caption font-medium text-textSecondary hover:text-textMain transition-colors">Expertise</a>
+                <a href="#work" class="font-body text-caption font-medium text-textSecondary hover:text-textMain transition-colors">Work</a>
+                <a href="#contact" class="btn-primary px-5 py-2 rounded-full text-caption font-semibold font-body">
+                    Get in Touch
+                </a>
+            </div>
+            
+            <button class="md:hidden text-textMain p-2" id="mobile-menu-btn" aria-label="Toggle menu">
+                <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden absolute top-16 left-0 w-full bg-primary/95 backdrop-blur-xl border-b border-white/5 px-6 py-6">
+            <div class="flex flex-col gap-4">
+                <a href="#about" class="font-body text-body font-medium text-textSecondary hover:text-textMain transition-colors py-2">About</a>
+                <a href="#expertise" class="font-body text-body font-medium text-textSecondary hover:text-textMain transition-colors py-2">Expertise</a>
+                <a href="#work" class="font-body text-body font-medium text-textSecondary hover:text-textMain transition-colors py-2">Work</a>
+                <a href="#contact" class="btn-primary px-5 py-3 rounded-full text-caption font-semibold font-body text-center mt-2">
+                    Get in Touch
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-20 relative overflow-hidden">
+        <div class="parallax-layer max-w-5xl mx-auto" data-speed="0.15">
+            <!-- Badge -->
+            <div class="reveal premium-badge inline-flex items-center gap-3 px-5 py-2.5 rounded-full mb-12">
+                <span class="w-2 h-2 rounded-full bg-gradient-to-r from-accentBlue to-accentPurple animate-pulse"></span>
+                <span id="typewriter-text" class="gradient-text-accent font-mono text-micro font-medium uppercase tracking-widest"></span>
+                <span class="w-0.5 h-4 bg-accentPurple cursor-blink"></span>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="reveal reveal-delay-1 text-hero mb-6">
+                <span class="gradient-text-hero block">Build.</span>
+                <span class="gradient-text-hero block">Intelligence.</span>
+            </h1>
+            
+            <!-- Subheadline -->
+            <p class="reveal reveal-delay-2 text-subtitle text-textMain max-w-2xl mx-auto mb-16 px-6 leading-relaxed" style="font-family: 'Lora', serif; text-align: center;">
+                Zero-to-One Innovation. Transforming complex concepts into production-ready AI deployments.
+            </p>
+            
+            <!-- CTA Buttons -->
+            <div class="reveal reveal-delay-3 flex flex-col sm:flex-row justify-center gap-4 px-4">
+                <a href="#work" class="btn-primary px-8 py-4 rounded-full font-body font-semibold text-body flex items-center justify-center gap-2">
+                    <span>Explore Deployments</span>
+                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                </a>
+                <a href="#contact" class="btn-secondary text-textMain px-8 py-4 rounded-full font-body font-semibold text-body flex items-center justify-center">
+                    Let&apos;s Talk
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 reveal reveal-delay-4">
+            <div class="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-2">
+                <div class="w-1 h-2 bg-white/50 rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 px-6 relative">
+        <div class="section-divider max-w-6xl mx-auto mb-32"></div>
+        
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="reveal text-display mb-5">
+                    <span class="text-textMain">Design meets</span>
+                    <span class="gradient-text-teal"> data.</span>
+                </h2>
+                <p class="reveal reveal-delay-1 font-body text-subtitle text-textSecondary">
+                    Bridging human intuition and machine intelligence.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="reveal reveal-delay-1 parallax-layer" data-speed="0.08">
+                    <div class="aspect-square rounded-3xl overflow-hidden border border-white/5">
+                        <img 
+                            src="https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=1000" 
+                            alt="Abstract neural network visualization" 
+                            loading="lazy"
+                            class="w-full h-full object-cover opacity-70 hover:opacity-100 hover:scale-105 transition-all duration-700"
+                        />
+                    </div>
+                </div>
+                
+                <div class="reveal reveal-delay-2 space-y-8">
+                    <p class="text-title text-textMain leading-snug">
+                        My focus is on <span class="gradient-text-accent">production-ready AI</span>. From fine-tuning massive models to architecting real-time neural workflows.
+                    </p>
+                    <p class="text-body-lg text-textSecondary font-body">
+                        I build agents that don&apos;t just process data—they reason and act. Combining elegant interfaces with highly resilient backend architectures that scale.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise" class="py-32 px-6 relative">
+        <div class="section-divider max-w-6xl mx-auto mb-32"></div>
+        
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="reveal text-display mb-5">
+                    <span class="text-textMain">Core</span>
+                    <span class="gradient-text-accent"> Capabilities.</span>
+                </h2>
+                <p class="reveal reveal-delay-1 font-body text-subtitle text-textSecondary">
+                    Engineered for extreme performance.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Card 1 -->
+                <div class="reveal reveal-delay-1 card-premium p-10 lg:p-12 rounded-3xl">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accentBlue/20 to-accentPurple/20 flex items-center justify-center mb-8">
+                        <span class="material-symbols-outlined text-3xl gradient-text-accent">memory</span>
+                    </div>
+                    <h3 class="text-title text-textMain mb-4">AI Engineering</h3>
+                    <p class="text-body text-textSecondary font-body mb-8">
+                        Orchestration, reasoning, SLMs, and MCP integration. Architecting systems that scale autonomously.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag-pill px-3 py-1.5 text-micro font-medium rounded-full text-textMuted uppercase tracking-wide">Agentic Workflows</span>
+                        <span class="tag-pill px-3 py-1.5 text-micro font-medium rounded-full text-textMuted uppercase tracking-wide">Model Optimization</span>
+                        <span class="tag-pill px-3 py-1.5 text-micro font-medium rounded-full text-textMuted uppercase tracking-wide">AI Guardrails</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="reveal reveal-delay-2 card-premium p-10 lg:p-12 rounded-3xl">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accentTeal/20 to-accentBlue/20 flex items-center justify-center mb-8">
+                        <span class="material-symbols-outlined text-3xl gradient-text-teal">code</span>
+                    </div>
+                    <h3 class="text-title text-textMain mb-4">Full-Stack Scalability</h3>
+                    <p class="text-body text-textSecondary font-body mb-8">
+                        Developing robust web applications to serve AI models with low latency and highly interactive interfaces.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag-pill px-3 py-1.5 text-micro font-medium rounded-full text-textMuted uppercase tracking-wide">React & Next.js</span>
+                        <span class="tag-pill px-3 py-1.5 text-micro font-medium rounded-full text-textMuted uppercase tracking-wide">TypeScript</span>
+                        <span class="tag-pill px-3 py-1.5 text-micro font-medium rounded-full text-textMuted uppercase tracking-wide">Node.js</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="reveal reveal-delay-3 card-premium p-10 lg:p-12 rounded-3xl">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accentPurple/20 to-accentTeal/10 flex items-center justify-center mb-8">
+                        <span class="material-symbols-outlined text-3xl text-accentPurple">bolt</span>
+                    </div>
+                    <h3 class="text-title text-textMain mb-4">API & Protocols</h3>
+                    <p class="text-body text-textSecondary font-body mb-8">
+                        Model Context Protocol, edge deployments, and complex cloud abstractions connecting models to the real world.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag-pill px-3 py-1.5 text-micro font-medium rounded-full text-textMuted uppercase tracking-wide">MCP</span>
+                        <span class="tag-pill px-3 py-1.5 text-micro font-medium rounded-full text-textMuted uppercase tracking-wide">Local LLMs</span>
+                        <span class="tag-pill px-3 py-1.5 text-micro font-medium rounded-full text-textMuted uppercase tracking-wide">FastAPI</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="reveal reveal-delay-4 card-premium p-10 lg:p-12 rounded-3xl">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accentTeal/20 to-accentBlue/10 flex items-center justify-center mb-8">
+                        <span class="material-symbols-outlined text-3xl text-accentTeal">rocket_launch</span>
+                    </div>
+                    <h3 class="text-title text-textMain mb-4">Zero-to-One Strategy</h3>
+                    <p class="text-body text-textSecondary font-body mb-8">
+                        Rapid prototyping and startup innovation. From whiteboard architecture to global deployments.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag-pill px-3 py-1.5 text-micro font-medium rounded-full text-textMuted uppercase tracking-wide">Prototyping</span>
+                        <span class="tag-pill px-3 py-1.5 text-micro font-medium rounded-full text-textMuted uppercase tracking-wide">System Architecture</span>
+                        <span class="tag-pill px-3 py-1.5 text-micro font-medium rounded-full text-textMuted uppercase tracking-wide">Cloud Dev</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="py-32 px-6 relative">
+        <div class="section-divider max-w-6xl mx-auto mb-32"></div>
+        
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="reveal text-display mb-5">
+                    <span class="text-textMain">Selected</span>
+                    <span class="gradient-text-teal"> Work.</span>
+                </h2>
+                <p class="reveal reveal-delay-1 font-body text-subtitle text-textSecondary">
+                    Apps that change the game.
+                </p>
+            </div>
+            
+            <div class="space-y-8">
+                <!-- Project 1 -->
+                <div class="reveal reveal-delay-1 project-card rounded-3xl">
+                    <div class="grid md:grid-cols-2">
+                        <div class="p-10 lg:p-14 flex flex-col justify-center">
+                            <span class="text-accentBlue text-micro font-semibold tracking-widest uppercase mb-5">Production</span>
+                            <h3 class="text-title text-textMain mb-4">India-Godview</h3>
+                            <p class="text-body text-textSecondary font-body mb-8">
+                                National-scale 3D visualization dashboard integrating real-time logistics and satellite API feeds.
+                            </p>
+                            <div>
+                                <a href="https://github.com/ravi3594444" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 btn-secondary px-5 py-2.5 rounded-full text-caption font-semibold text-textMain font-body">
+                                    <span class="material-symbols-outlined text-lg">code</span>
+                                    View on GitHub
+                                </a>
+                            </div>
+                        </div>
+                        <div class="h-64 md:h-auto bg-secondary overflow-hidden">
+                            <img 
+                                src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200" 
+                                alt="India Godview Dashboard" 
+                                loading="lazy"
+                                class="project-image w-full h-full object-cover"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="reveal reveal-delay-2 project-card rounded-3xl">
+                    <div class="grid md:grid-cols-2">
+                        <div class="h-64 md:h-auto bg-secondary overflow-hidden order-2 md:order-1">
+                            <img 
+                                src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200" 
+                                alt="Guardian MCP Security" 
+                                loading="lazy"
+                                class="project-image w-full h-full object-cover"
+                            />
+                        </div>
+                        <div class="p-10 lg:p-14 flex flex-col justify-center order-1 md:order-2">
+                            <span class="text-accentPurple text-micro font-semibold tracking-widest uppercase mb-5">Protocol</span>
+                            <h3 class="text-title text-textMain mb-4">Guardian MCP</h3>
+                            <p class="text-body text-textSecondary font-body mb-8">
+                                Ethical guardrail protocol for LLMs, monitoring context to prevent adversarial attacks and model poisoning.
+                            </p>
+                            <div>
+                                <a href="https://github.com/ravi3594444" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 btn-secondary px-5 py-2.5 rounded-full text-caption font-semibold text-textMain font-body">
+                                    <span class="material-symbols-outlined text-lg">code</span>
+                                    View on GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="reveal reveal-delay-3 project-card rounded-3xl">
+                    <div class="grid md:grid-cols-2">
+                        <div class="p-10 lg:p-14 flex flex-col justify-center">
+                            <span class="text-accentTeal text-micro font-semibold tracking-widest uppercase mb-5">Multi-Agent</span>
+                            <h3 class="text-title text-textMain mb-4">SwarmTrace</h3>
+                            <p class="text-body text-textSecondary font-body mb-8">
+                                Pytest framework for AI Multi-Agents. Built robust testing environments for the AMD Hackathon project.
+                            </p>
+                            <div>
+                                <a href="https://github.com/ravi3594444" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 btn-secondary px-5 py-2.5 rounded-full text-caption font-semibold text-textMain font-body">
+                                    <span class="material-symbols-outlined text-lg">code</span>
+                                    View on GitHub
+                                </a>
+                            </div>
+                        </div>
+                        <div class="h-64 md:h-auto bg-secondary overflow-hidden">
+                            <img 
+                                src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200" 
+                                alt="SwarmTrace AI Framework" 
+                                loading="lazy"
+                                class="project-image w-full h-full object-cover"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-6 relative overflow-hidden">
+        <div class="section-divider max-w-6xl mx-auto mb-32"></div>
+        
+        <!-- Subtle Background Glow -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-b from-white/[0.03] to-transparent rounded-full blur-[80px]"></div>
+        </div>
+        
+        <div class="max-w-3xl mx-auto text-center relative z-10">
+            <h2 class="reveal text-display mb-5">
+                <span class="text-textMain">Let&apos;s</span>
+                <span class="gradient-text-accent"> build.</span>
+            </h2>
+            <p class="reveal reveal-delay-1 font-body text-subtitle text-textSecondary mb-12 max-w-xl mx-auto">
+                Currently taking on high-stakes AI integrations and technical strategy consulting.
+            </p>
+            
+            <div class="reveal reveal-delay-2 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="mailto:ravi.ai.founder@gmail.com" class="btn-secondary text-textMain px-8 py-4 rounded-2xl font-semibold text-body font-body flex items-center justify-center gap-3">
+                    <span class="material-symbols-outlined text-xl">mail</span>
+                    Email Me
+                </a>
+                <a href="https://t.me/Raviiii89" target="_blank" rel="noopener noreferrer" class="btn-primary px-8 py-4 rounded-2xl font-semibold text-body font-body flex items-center justify-center gap-3">
+                    <span class="material-symbols-outlined text-xl">send</span>
+                    Message on Telegram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-gradient py-12 px-6 border-t border-white/5">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-textMuted text-caption font-body">
+                &copy; 2026 Ravi Kumar. All rights reserved.
+            </p>
+            <div class="flex items-center gap-8">
+                <a href="https://github.com/ravi3594444" target="_blank" rel="noopener noreferrer" class="text-textMuted hover:text-textMain transition-colors text-caption font-body font-medium">GitHub</a>
+                <a href="https://www.linkedin.com/in/ravi-kumar-4966713b3" target="_blank" rel="noopener noreferrer" class="text-textMuted hover:text-textMain transition-colors text-caption font-body font-medium">LinkedIn</a>
+                <a href="https://t.me/Raviiii89" target="_blank" rel="noopener noreferrer" class="text-textMuted hover:text-textMain transition-colors text-caption font-body font-medium">Telegram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = menuBtn.querySelector('.material-symbols-outlined');
+        
+        menuBtn.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            menuIcon.textContent = isOpen ? 'close' : 'menu';
+        });
+        
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                menuIcon.textContent = 'menu';
+            });
+        });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target); // FIX: stop watching, prevent memory leak
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -80px 0px'
+        });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Parallax + Navbar — single RAF-throttled passive listener (merged for performance)
+        const parallaxLayers = document.querySelectorAll('.parallax-layer');
+        const spotlight = document.querySelector('.spotlight');
+        const ambientGlow = document.querySelector('.ambient-glow');
+        const nav = document.querySelector('nav');
+
+        let ticking = false;
+
+        function updateOnScroll() {
+            const scrollY = window.scrollY;
+
+            // Parallax for content layers
+            // FIX: use != null check instead of || to avoid treating data-speed="0" as missing
+            parallaxLayers.forEach(layer => {
+                const rawSpeed = layer.dataset.speed;
+                const speed = (rawSpeed != null && rawSpeed !== '') ? parseFloat(rawSpeed) : 0.1;
+                layer.style.transform = `translateY(${scrollY * speed}px)`;
+            });
+
+            // Spotlight opacity
+            if (spotlight) {
+                spotlight.style.opacity = Math.max(0, 1 - (scrollY / 800));
+            }
+
+            // Ambient glow intensity based on scroll
+            if (ambientGlow) {
+                ambientGlow.style.opacity = Math.min(1, scrollY / 500);
+            }
+
+            // FIX: Navbar border merged here — was a separate unthrottled scroll listener
+            if (nav) {
+                nav.style.borderBottomColor = scrollY > 50
+                    ? 'rgba(255, 255, 255, 0.1)'
+                    : 'rgba(255, 255, 255, 0.05)';
+            }
+
+            ticking = false;
+        }
+
+        // FIX: Single listener with { passive: true } — tells browser no preventDefault()
+        // is called, allowing it to optimise scroll without waiting for JS to finish
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateOnScroll);
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // Typewriter Effect
+        const roles = [
+            "AI Systems Engineer",
+            "Zero-to-One Innovator",
+            "Neural Architect",
+            "Full-Stack Developer"
+        ];
+        const typeTarget = document.getElementById('typewriter-text');
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        
+        function typeWriter() {
+            // FIX: Guard — stop recursion if element is removed from DOM
+            if (!typeTarget || !document.body.contains(typeTarget)) return;
+
+            const currentRole = roles[roleIndex];
+            
+            if (isDeleting) {
+                typeTarget.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeTarget.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            let typingSpeed = isDeleting ? 25 : 60 + Math.random() * 40;
+            
+            if (!isDeleting && charIndex === currentRole.length) {
+                typingSpeed = 2500;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typingSpeed = 400;
+            }
+            
+            setTimeout(typeWriter, typingSpeed);
+        }
+        
+        // Start typewriter after a short delay
+        setTimeout(typeWriter, 1000);
+
+        // NOTE: Smooth scroll JS removed — <html class="scroll-smooth"> (Tailwind)
+        // applies scroll-behavior:smooth natively. No JS listener needed.
+
+        // Navbar scroll handled inside updateOnScroll() above (merged for perf)
+    </script>
+    <!-- Vercel Analytics — injected here because Next.js layout.tsx is bypassed by the rewrite -->
+    <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
