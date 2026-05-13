@@ -1,20 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+    <!-- Primary Meta -->
+    <title>Ravi Kumar | Neural Architect & AI Engineer</title>
+    <meta name="description" content="AI Engineer & Neural Architect specializing in generative models, autonomous agents, and zero-to-one AI deployments. Available for freelance."/>
+    <meta name="author" content="Ravi Kumar"/>
+    <meta name="robots" content="index, follow"/>
+    <link rel="canonical" href="https://raviportfollio.vercel.app/"/>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://raviportfollio.vercel.app/"/>
+    <meta property="og:title" content="Ravi Kumar | Neural Architect & AI Engineer"/>
+    <meta property="og:description" content="AI Engineer specializing in generative models, autonomous agents, and zero-to-one AI deployments. Available for freelance."/>
+    <meta property="og:image" content="https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=1200&auto=format&fit=crop"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <meta property="og:site_name" content="Ravi Kumar Portfolio"/>
+    <meta property="og:locale" content="en_US"/>
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:url" content="https://raviportfollio.vercel.app/"/>
+    <meta name="twitter:title" content="Ravi Kumar | Neural Architect & AI Engineer"/>
+    <meta name="twitter:description" content="AI Engineer specializing in generative models, autonomous agents, and zero-to-one AI deployments."/>
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1620121692029-d088224ddc74?q=80&w=1200&auto=format&fit=crop"/>
+
+    <!-- Icons -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
     <link rel="icon" href="/favicon.svg" sizes="any"/>
     <link rel="apple-touch-icon" href="/apple-icon.png"/>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Ravi Kumar | Neural Architect</title>
-    <meta name="description" content="AI Engineer & Neural Architect specializing in generative models and autonomous agents."/>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Premium Font Stack: Syne (Gilroy-style) for display, Inter for body -->
+    <!-- font-display:swap via &display=swap prevents invisible text during load -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@400;500;600;700;800&family=Lora:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=swap" rel="stylesheet"/>
     
     <script>
         tailwind.config = {
@@ -78,12 +104,12 @@
             font-family: 'Syne', system-ui, sans-serif;
         }
 
-        /* Premium Dark Gradient Background - Purple/Magenta Tones */
+        /* Premium Dark Gradient Background */
         .dark-gradient-bg {
             position: fixed;
             inset: 0;
             z-index: -2;
-            background: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/photo-1638184984605-af1f05249a56-gUpjVt218whDQzFqNA2ZMNwwbVqmsN.avif') center center / cover no-repeat;
+            background: url('https://images.unsplash.com/photo-1638184984605-af1f05249a56?q=80&w=1920&auto=format&fit=crop') center center / cover no-repeat;
         }
 
         /* Dark overlay for better text contrast */
@@ -354,9 +380,33 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #444;
         }
+
+        /* Keyboard Focus Indicators — visible only for keyboard nav */
+        :focus-visible {
+            outline: 2px solid #0071E3;
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid #0071E3;
+            outline-offset: 4px;
+            border-radius: 8px;
+        }
+
+        /* Scroll indicator — fade out after hero leaves viewport */
+        #scroll-indicator {
+            transition: opacity 0.5s ease;
+        }
+        #scroll-indicator.hidden-indicator {
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="selection:bg-white/20 selection:text-white">
+    <!-- Skip to main content — keyboard accessibility -->
+    <a href="#about" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-accentBlue focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-semibold">Skip to main content</a>
     <!-- Premium Dark Gradient Background -->
     <div class="dark-gradient-bg"></div>
     <div class="dark-overlay"></div>
@@ -364,10 +414,10 @@
     <div class="ambient-glow"></div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 nav-glass border-b border-white/5">
+    <nav class="fixed top-0 w-full z-50 nav-glass border-b border-white/5" aria-label="Main navigation">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="font-display text-xl font-bold tracking-tight text-textMain hover:text-accentBlue transition-colors">
-                Ravi<span class="gradient-text-accent">.</span>
+            <a href="#" class="font-display text-xl font-bold tracking-tight text-textMain hover:text-accentBlue transition-colors" aria-label="Ravi Kumar — home">
+                Ravi<span class="gradient-text-accent" aria-hidden="true">.</span>
             </a>
             
             <div class="hidden md:flex items-center gap-10">
@@ -379,13 +429,13 @@
                 </a>
             </div>
             
-            <button class="md:hidden text-textMain p-2" id="mobile-menu-btn" aria-label="Toggle menu">
-                <span class="material-symbols-outlined text-2xl">menu</span>
+            <button class="md:hidden text-textMain p-2" id="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+                <span class="material-symbols-outlined text-2xl" aria-hidden="true">menu</span>
             </button>
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden absolute top-16 left-0 w-full bg-primary/95 backdrop-blur-xl border-b border-white/5 px-6 py-6">
+        <div id="mobile-menu" class="md:hidden absolute top-16 left-0 w-full bg-primary/95 backdrop-blur-xl border-b border-white/5 px-6 py-6" role="navigation" aria-label="Mobile navigation">
             <div class="flex flex-col gap-4">
                 <a href="#about" class="font-body text-body font-medium text-textSecondary hover:text-textMain transition-colors py-2">About</a>
                 <a href="#expertise" class="font-body text-body font-medium text-textSecondary hover:text-textMain transition-colors py-2">Expertise</a>
@@ -398,13 +448,14 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-20 relative overflow-hidden">
+    <main id="main-content">
+    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-20 relative overflow-hidden" aria-label="Hero">
         <div class="parallax-layer max-w-5xl mx-auto" data-speed="0.15">
             <!-- Badge -->
-            <div class="reveal premium-badge inline-flex items-center gap-3 px-5 py-2.5 rounded-full mb-12">
-                <span class="w-2 h-2 rounded-full bg-gradient-to-r from-accentBlue to-accentPurple animate-pulse"></span>
-                <span id="typewriter-text" class="gradient-text-accent font-mono text-micro font-medium uppercase tracking-widest"></span>
-                <span class="w-0.5 h-4 bg-accentPurple cursor-blink"></span>
+            <div class="reveal premium-badge inline-flex items-center gap-3 px-5 py-2.5 rounded-full mb-12" role="status">
+                <span class="w-2 h-2 rounded-full bg-gradient-to-r from-accentBlue to-accentPurple animate-pulse" aria-hidden="true"></span>
+                <span id="typewriter-text" class="gradient-text-accent font-mono text-micro font-medium uppercase tracking-widest" aria-live="polite" aria-atomic="true"></span>
+                <span class="w-0.5 h-4 bg-accentPurple cursor-blink" aria-hidden="true"></span>
             </div>
 
             <!-- Main Headline -->
@@ -431,7 +482,7 @@
         </div>
         
         <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 reveal reveal-delay-4">
+        <div id="scroll-indicator" class="absolute bottom-10 left-1/2 -translate-x-1/2 reveal reveal-delay-4" aria-hidden="true">
             <div class="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-2">
                 <div class="w-1 h-2 bg-white/50 rounded-full animate-bounce"></div>
             </div>
@@ -691,8 +742,10 @@
         </div>
     </section>
 
+    </main>
+
     <!-- Footer -->
-    <footer class="footer-gradient py-12 px-6 border-t border-white/5">
+    <footer class="footer-gradient py-12 px-6 border-t border-white/5" aria-label="Site footer">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <p class="text-textMuted text-caption font-body">
                 &copy; 2026 Ravi Kumar. All rights reserved.
@@ -714,6 +767,7 @@
         menuBtn.addEventListener('click', () => {
             const isOpen = mobileMenu.classList.toggle('open');
             menuIcon.textContent = isOpen ? 'close' : 'menu';
+            menuBtn.setAttribute('aria-expanded', String(isOpen));
         });
         
         // Close mobile menu on link click
@@ -721,6 +775,7 @@
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('open');
                 menuIcon.textContent = 'menu';
+                menuBtn.setAttribute('aria-expanded', 'false');
             });
         });
 
@@ -768,6 +823,12 @@
             // Ambient glow intensity based on scroll
             if (ambientGlow) {
                 ambientGlow.style.opacity = Math.min(1, scrollY / 500);
+            }
+
+            // Hide scroll indicator once user scrolls past hero (~100px)
+            const scrollIndicator = document.getElementById('scroll-indicator');
+            if (scrollIndicator) {
+                scrollIndicator.classList.toggle('hidden-indicator', scrollY > 100);
             }
 
             // FIX: Navbar border merged here — was a separate unthrottled scroll listener

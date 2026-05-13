@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://raviportfollio.vercel.app/sitemap.xml
