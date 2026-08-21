@@ -36,10 +36,6 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "components/ui",
-    "components/theme-provider.tsx",
-    "hooks",
-    "lib"
+    "node_modules"
   ]
 }
