@@ -1,14 +1,33 @@
-import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: 'Ravi Kumar | Neural Architect & AI Engineer',
-  description: 'AI Engineer & Neural Architect specializing in generative models, autonomous agents, and zero-to-one AI deployments.',
+  metadataBase: new URL('https://raviportfollio.vercel.app'),
+  title: 'Ravi Kumar — AI Engineer & Product Builder',
+  description: 'Ravi Kumar builds dependable AI agents, model workflows, and polished full-stack products from zero to one.',
   authors: [{ name: 'Ravi Kumar' }],
+  creator: 'Ravi Kumar',
+  keywords: ['AI engineer', 'AI agents', 'MCP', 'multi-agent systems', 'full-stack developer'],
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: '/',
+    siteName: 'Ravi Kumar Portfolio',
+    title: 'Ravi Kumar — AI Engineer & Product Builder',
+    description: 'Dependable AI agents, model workflows, and polished full-stack products built from zero to one.',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Ravi Kumar — AI Engineer & Product Builder',
+    description: 'Dependable AI agents, model workflows, and polished full-stack products built from zero to one.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: [
       {
@@ -28,6 +47,13 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#06070a',
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -35,8 +61,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased">
+      <body>
         {children}
+        <script dangerouslySetInnerHTML={{ __html: 'window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)}' }} />
+        <script defer src="/_vercel/insights/script.js" />
       </body>
     </html>
   )
